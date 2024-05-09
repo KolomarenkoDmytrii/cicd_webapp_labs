@@ -18,11 +18,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from main.views import home, feedbacks
+from main import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    path("", home, name="home"),
-    path("feedbacks", feedbacks, name="feedbacks"),
+    path("", views.home, name="home"),
+    path("feedbacks", views.feedbacks, name="feedbacks"),
+    path("services_particulars/lawyer", views.lawyer_info, name="services-lawyer-info"),
+    path("services_particulars/licenses", views.licenses_info, name="services-licenses-info"),
+    path("services_particulars/registration", views.registration_info, name="services-registration-info"),
 ]

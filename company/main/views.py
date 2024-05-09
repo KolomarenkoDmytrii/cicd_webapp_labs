@@ -43,3 +43,21 @@ def feedbacks(request):
             "feedbacks": Feedback.objects.all()
         }
     )
+
+def lawyer_info(request):
+    return render(
+        request,
+        "services_particulars/lawyer.html"
+    )
+
+def licenses_info(request):
+    return render(
+        request,
+        "services_particulars/licenses.html"
+    )
+
+def registration_info(request):
+    return render(
+        request,
+        "services_particulars/registration.html"
+    )

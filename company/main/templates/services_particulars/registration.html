@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Business Frontpage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        {% include 'components/navbar.html' %}
+        {% include 'components/header.html' %}
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <p>Легалізація власного бізнесу є обов’язковою процедурою для всіх, хто отримує прибуток від підприємницької діяльності. Однією з найпоширеніших форм ведення бізнесу в Україні реєстрація ТОВ – товариства з обмеженою відповідальністю, що представляє собою господарство, з поділеним на частки статутним капіталом (розмір часток визначається статутними документами). Створення товариства дозволяє узаконити будь – яке об’єднання активів та створює відповідні гарантії рівності за захищеності сторін в процесі діяльності та розвитку компанії.<p>
+
+                <p>Процедура створення товариства з обмеженою відповідальністю – процес складний та трудомісткий, який передбачає наявність спеціальних знань та досвіду. Враховуючи це, збір та підготовка необхідних документів потребують уважності та професійного підходу. Державна реєстрація ТОВ складається з декількох послідовних етапів:</p>
+                <ul>
+                    <li>Аналізу та підготовки інформаційних даних для оформлення документів (вказані в них відомості повинні бути правдивими та не суперечити Закону України «Про товариства з обмеженою та додатковою відповідальністю»);</li>
+                    <li>Підготовка, підписання документів для подальшої їх передачі державному реєстратору;</li>
+                    <li>Проведення державної реєстрації створення юридичної особи з подальшим отримання опису та виписки про реєстрацію.</li>
+                </ul>
+
+            </div>
+        </section>
+
+        {% include 'components/footer.html' %}
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
