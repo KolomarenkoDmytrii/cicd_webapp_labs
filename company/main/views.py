@@ -18,6 +18,7 @@ def home(request):
             messages.success(request, "Відгук успішно збережено.")
             # return http.HttpResponseRedirect("")
         else:
+            error_message = ""
             messages.error(request, "Помилка при заповненні форми.")
         return http.HttpResponseRedirect("")
 
