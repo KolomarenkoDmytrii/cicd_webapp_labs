@@ -29,7 +29,7 @@ def home(request):
         request,
         "index.html",
         context={
-            "feedbacks": Feedback.objects.all()[:2],
+            "feedbacks": Feedback.objects.all()[:4],
             "feedback_form": feedback_form
         }
     )
