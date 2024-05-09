@@ -175,6 +175,8 @@ cython_debug/
 # Swap Files #
 .*.kate-swp
 .swp.*
+# Notes #
+.kateproject.notes
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
