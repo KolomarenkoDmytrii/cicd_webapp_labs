@@ -33,3 +33,12 @@ def home(request):
             "feedback_form": feedback_form
         }
     )
+
+def feedbacks(request):
+    return render(
+        request,
+        "feedbacks.html",
+        context={
+            "feedbacks": Feedback.objects.all()
+        }
+    )

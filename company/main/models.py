@@ -9,7 +9,6 @@ class Feedback(models.Model):
     text = models.TextField(max_length=1000)
     rating = models.SmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
 
-    # pub_date = models.DateField(auto_now_add=True)
     published_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
