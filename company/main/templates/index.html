@@ -33,33 +33,6 @@
                         <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
-                <!--<div class="col-lg-4">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-bank"></i></div>
-                    <h2 class="h4 fw-bolder">Банкрутство/ліквідація</h2>
-                    <p>Замовити юридичний супровід при припиненні діяльності підприємства/юридичної особи Ви можете тільки тут</p>
-                    <a class="text-decoration-none" href="#!">
-                        Call to action
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-passport"></i></div>
-                    <h2 class="h4 fw-bolder">Міграційні послуги</h2>
-                    <p>Отримати консультацію юриста з міграційних питань за найвигіднішою ціною Ви можете тільки тут ✔Досвідчені юристи. Тисніть прямо зараз!</p>
-                    <a class="text-decoration-none" href="#!">
-                        Call to action
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-house"></i></div>
-                    <h2 class="h4 fw-bolder">Сімейні справи</h2>
-                    <p>Замовити послуги юриста по сімейним справам за найвигіднішою ціною Ви можете тільки тут ✔Швидке оформлення ✔Досвідчені юристи. Тисніть прямо зараз!</p>
-                    <a class="text-decoration-none" href="#!">
-                        Call to action
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>-->
             </div>
         </div>
     </section>
@@ -256,14 +229,7 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post">
+                    <form id="contactForm" method="post">
                     {% csrf_token %}
 
                         <!-- Name input-->
@@ -279,7 +245,6 @@
                         <div class="form-floating mb-3">
                             {{ feedback_form.text.errors }}
                             {{ feedback_form.text }}
-                            <!--<textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>-->
                             <label for="{{ feedback_form.text.id_for_label }}">Текст</label>
                             <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                         </div>
@@ -311,9 +276,8 @@
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
-                        <p>{{ DEFAULT_MESSAGE_LEVELS.SUCCES }}</p>
                         <!-- Submit Button-->
-                        <div class="d-grid"><input class="btn btn-primary btn-lg" id="submitButton" type="submit" value="Submit"></div>
+                        <div class="d-grid"><input class="btn btn-primary btn-lg" id="submitButton" type="submit" value="Надіслати"></div>
                     </form>
                 </div>
             </div>

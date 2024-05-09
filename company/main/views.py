@@ -44,6 +44,12 @@ def feedbacks(request):
         }
     )
 
+def about_page(request):
+    return render(
+        request,
+        "about.html"
+    )
+
 def lawyer_info(request):
     return render(
         request,

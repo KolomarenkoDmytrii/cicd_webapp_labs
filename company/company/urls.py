@@ -28,4 +28,5 @@ urlpatterns = [
     path("services_particulars/lawyer", views.lawyer_info, name="services-lawyer-info"),
     path("services_particulars/licenses", views.licenses_info, name="services-licenses-info"),
     path("services_particulars/registration", views.registration_info, name="services-registration-info"),
+    path("about", views.about_page, name="about-page"),
 ]
