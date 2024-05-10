@@ -235,10 +235,8 @@
                         <!-- Name input-->
                         <div class="form-floating mb-3">
                             {{ feedback_form.user_name.errors }}
-                            <!--<input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />-->
                             {{ feedback_form.user_name }}
                             <label for="{{ feedback_form.user_name.id_for_label }}">Ім'я</label>
-                            <!--<div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>-->
                         </div>
 
                         <!-- Message input-->
@@ -246,14 +244,11 @@
                             {{ feedback_form.text.errors }}
                             {{ feedback_form.text }}
                             <label for="{{ feedback_form.text.id_for_label }}">Текст</label>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                         </div>
                         <!-- Rating input-->
                         <div class="form-floating mb-3">
-                            {{ feedback_form.rating.errors }}
                             {{ feedback_form.rating }}
                             <label for="{{ feedback_form.rating.id_for_label }}">Оцінка</label>
-                            <!--<div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>-->
                         </div>
 
                         {% if messages %}

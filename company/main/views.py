@@ -11,15 +11,20 @@ def home(request):
     if request.method == "POST":
         feedback_form = FeedbackForm(request.POST)
         if feedback_form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             feedback_form.save()
             messages.success(request, "Відгук успішно збережено.")
             # return http.HttpResponseRedirect("")
         else:
             error_message = ""
             messages.error(request, "Помилка при заповненні форми.")
+
+            if not "rating" in feedback_form.cleaned_data.keys():
+                messages.error(request, "Оцінка не вказана або вона не в межах між 1 і 5.")
+            if not "text" in feedback_form.cleaned_data.keys():
+                messages.error(request, "Текст не вказаний або він задовгий.")
+            if not "user_name" in feedback_form.cleaned_data.keys():
+                messages.error(request, "Ім'я не вказане або воно задовге.")
+
         return http.HttpResponseRedirect("")
 
     # if a GET (or any other method) we'll create a blank form
