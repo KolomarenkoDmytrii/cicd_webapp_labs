@@ -1,21 +1,35 @@
 from django.shortcuts import render
 from django import http
 from django.contrib import messages
+from django.views import View
 
 from .models import Feedback
 from .forms import FeedbackForm
 
 # Create your views here.
-def home(request):
-    # return render(request, "main/home.html")
-    if request.method == "POST":
+
+class HomeView(View):
+    model_class = Feedback
+    form_class = FeedbackForm
+    template_name = "index.html"
+
+    def context(self, form):
+        return {
+            "feedbacks": self.model_class.objects.all()[:4],
+            "feedback_form": form
+        }
+
+    def get(self, request, *args, **kwargs):
+        feedback_form = FeedbackForm()
+        return render(request, self.template_name, self.context(FeedbackForm()))
+
+    def post(self, request, *args, **kwargs):
         feedback_form = FeedbackForm(request.POST)
+
         if feedback_form.is_valid():
             feedback_form.save()
             messages.success(request, "Відгук успішно збережено.")
-            # return http.HttpResponseRedirect("")
         else:
-            error_message = ""
             messages.error(request, "Помилка при заповненні форми.")
 
             if not "rating" in feedback_form.cleaned_data.keys():
@@ -27,18 +41,6 @@ def home(request):
 
         return http.HttpResponseRedirect("")
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        feedback_form = FeedbackForm()
-
-    return render(
-        request,
-        "index.html",
-        context={
-            "feedbacks": Feedback.objects.all()[:4],
-            "feedback_form": feedback_form
-        }
-    )
 
 def feedbacks(request):
     return render(
