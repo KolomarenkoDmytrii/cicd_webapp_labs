@@ -14,6 +14,8 @@ class HomeView(View):
     template_name = "index.html"
 
     def context(self, form):
+    """Give context for feedback section and form.
+    """
         return {
             "feedbacks": self.model_class.objects.all()[:4],
             "feedback_form": form

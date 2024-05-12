@@ -3,6 +3,8 @@ from .models import Feedback
 
 
 class FeedbackForm(forms.ModelForm):
+""" Form for saving visitors feedbacks'.
+"""
     class Meta:
         model = Feedback
         fields = ["user_name", "text", "rating"]

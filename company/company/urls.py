@@ -21,8 +21,10 @@ from django.urls import path
 from main import views
 
 urlpatterns = [
+    # Admin site path
     path("admin/", admin.site.urls),
 
+    # Website paths
     path("", views.HomeView.as_view(), name="home"),
     path("feedbacks", views.feedbacks, name="feedbacks"),
     path("services_particulars/lawyer", views.lawyer_info, name="services-lawyer-info"),

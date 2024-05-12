@@ -66,6 +66,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
 
+                # own context processors
                 "main.context_processors.site_title",
                 "main.context_processors.site_copyright",
             ],
@@ -113,10 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-# LANGUAGE_CODE = "en-us"
+# Website target audience is Ukraine, so localisation setting
+# is setted for Ukraine
 LANGUAGE_CODE = "uk-ua"
 
-# TIME_ZONE = "UTC"
 TIME_ZONE = "Europe/Kyiv"
 
 USE_I18N = True
