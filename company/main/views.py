@@ -8,18 +8,15 @@ from .forms import FeedbackForm
 
 # Create your views here.
 
+
 class HomeView(View):
     model_class = Feedback
     form_class = FeedbackForm
     template_name = "index.html"
 
     def context(self, form):
-    """Give context for feedback section and form.
-    """
-        return {
-            "feedbacks": self.model_class.objects.all()[:4],
-            "feedback_form": form
-        }
+        """Give context for feedback section and form."""
+        return {"feedbacks": self.model_class.objects.all()[:4], "feedback_form": form}
 
     def get(self, request, *args, **kwargs):
         feedback_form = FeedbackForm()
@@ -35,7 +32,9 @@ class HomeView(View):
             messages.error(request, "Помилка при заповненні форми.")
 
             if not "rating" in feedback_form.cleaned_data.keys():
-                messages.error(request, "Оцінка не вказана або вона не в межах між 1 і 5.")
+                messages.error(
+                    request, "Оцінка не вказана або вона не в межах між 1 і 5."
+                )
             if not "text" in feedback_form.cleaned_data.keys():
                 messages.error(request, "Текст не вказаний або він задовгий.")
             if not "user_name" in feedback_form.cleaned_data.keys():
@@ -46,33 +45,21 @@ class HomeView(View):
 
 def feedbacks(request):
     return render(
-        request,
-        "feedbacks.html",
-        context={
-            "feedbacks": Feedback.objects.all()
-        }
+        request, "feedbacks.html", context={"feedbacks": Feedback.objects.all()}
     )
+
 
 def about_page(request):
-    return render(
-        request,
-        "about.html"
-    )
+    return render(request, "about.html")
+
 
 def lawyer_info(request):
-    return render(
-        request,
-        "services_particulars/lawyer.html"
-    )
+    return render(request, "services_particulars/lawyer.html")
+
 
 def licenses_info(request):
-    return render(
-        request,
-        "services_particulars/licenses.html"
-    )
+    return render(request, "services_particulars/licenses.html")
+
 
 def registration_info(request):
-    return render(
-        request,
-        "services_particulars/registration.html"
-    )
+    return render(request, "services_particulars/registration.html")

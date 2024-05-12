@@ -2,7 +2,9 @@ from django.contrib import admin, messages
 
 
 from .models import Feedback
+
 # Register your models here.
+
 
 class FeedbackAdmin(admin.ModelAdmin):
     NUM_OF_LAST_FEEDBACKS = 10
@@ -14,9 +16,14 @@ class FeedbackAdmin(admin.ModelAdmin):
         return False
 
     def has_delete_permission(self, request, obj=None):
-        if obj in Feedback.objects.all()[:FeedbackAdmin.NUM_OF_LAST_FEEDBACKS]:
-            messages.error(request, f"You cannot delete one of the {FeedbackAdmin.NUM_OF_LAST_FEEDBACKS} last feedbacks")
+        """Prevent deletion of N last recent feedbacks."""
+        if obj in Feedback.objects.all()[: FeedbackAdmin.NUM_OF_LAST_FEEDBACKS]:
+            messages.error(
+                request,
+                f"You cannot delete one of the {FeedbackAdmin.NUM_OF_LAST_FEEDBACKS} last recent feedbacks",
+            )
             return False
         return True
+
 
 admin.site.register(Feedback, FeedbackAdmin)
