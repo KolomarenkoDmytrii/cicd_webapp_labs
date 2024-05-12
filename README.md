@@ -1,15 +1,18 @@
 # cicd_webapp_labs
 CI/CD web-app development laboratory works.
 
-# Run Docker image
-1. `docker build -t cicd-webapp .`
-2. `docker run -dp 127.0.0.1:8000:8000 cicd-webapp`
+## About
+This project is a law firm website.
 
-...or to run with database (PostgreSQL):
-`docker compose -f docker-compose.yml up`
+The text content is taken from https://lawflagman.com.ua/
+
+## How to run the project
+To run the project execude this command:
+`docker-compose -f docker-compose.yml up`
 
 To run migrations:
-`docker-compose run web python company/manage.py migrate`
+1. `docker-compose -f docker-compose.yml run web python company/manage.py makemigrations` (сreate new migration)
+2. `docker-compose -f docker-compose.yml run web python company/manage.py migrate`
 
 To create admin account (superuser):
-`docker-compose run web python company/manage.py createsuperuser`
+`docker-compose -f docker-compose.yml run web python company/manage.py createsuperuser`
