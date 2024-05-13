@@ -1,7 +1,7 @@
 from django.contrib import admin, messages
 
 
-from .models import Feedback
+from .models import Feedback, ContactInfo
 
 # Register your models here.
 
@@ -26,4 +26,10 @@ class FeedbackAdmin(admin.ModelAdmin):
         return True
 
 
+class ContactsInfoAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        return False
+
+
 admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(ContactInfo, ContactsInfoAdmin)

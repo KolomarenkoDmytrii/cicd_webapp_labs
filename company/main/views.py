@@ -21,22 +21,20 @@ class HomeView(View):
             context={
                 "feedbacks": self.model_class.objects.all()[:4],
                 "contact_form": ContactForm(),
-            }
+            },
         )
 
     def post(self, request, *args, **kwargs):
-        contact_form = FeedbackForm(request.POST)
+        contact_form = ContactForm(request.POST)
 
         if contact_form.is_valid():
             contact_form.save()
-            messages.success(request, "Відгук успішно збережено.")
+            messages.success(request, "Контактні дані успішно надіслано.")
         else:
             messages.error(request, "Помилка при заповненні форми.")
 
             if not "email" in contact_form.cleaned_data.keys():
-                messages.error(
-                    request, "Помилка при введені адреси електронної пошти."
-                )
+                messages.error(request, "Помилка при введені адреси електронної пошти.")
             if not "message" in contact_form.cleaned_data.keys():
                 messages.error(request, "Повідомлення не вказане або воно задовге.")
             if not "user_name" in contact_form.cleaned_data.keys():
@@ -55,7 +53,7 @@ class FeedbacksView(View):
             context={
                 "feedbacks": Feedback.objects.all(),
                 "feedback_form": FeedbackForm(),
-            }
+            },
         )
 
     def post(self, request, *args, **kwargs):
