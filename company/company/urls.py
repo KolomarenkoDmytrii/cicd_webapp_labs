@@ -26,7 +26,7 @@ urlpatterns = [
 
     # Website paths
     path("", views.HomeView.as_view(), name="home"),
-    path("feedbacks", views.feedbacks, name="feedbacks"),
+    path("feedbacks", views.FeedbacksView.as_view(), name="feedbacks"),
     path("services_particulars/lawyer", views.lawyer_info, name="services-lawyer-info"),
     path("services_particulars/licenses", views.licenses_info, name="services-licenses-info"),
     path("services_particulars/registration", views.registration_info, name="services-registration-info"),

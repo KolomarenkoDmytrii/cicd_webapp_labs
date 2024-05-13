@@ -18,10 +18,43 @@ class HomeView(View):
         return render(
             request,
             self.template_name,
-            {
+            context={
                 "feedbacks": self.model_class.objects.all()[:4],
-                "feedback_form": FeedbackForm(),
                 "contact_form": ContactForm(),
+            }
+        )
+
+    def post(self, request, *args, **kwargs):
+        contact_form = FeedbackForm(request.POST)
+
+        if contact_form.is_valid():
+            contact_form.save()
+            messages.success(request, "Відгук успішно збережено.")
+        else:
+            messages.error(request, "Помилка при заповненні форми.")
+
+            if not "email" in contact_form.cleaned_data.keys():
+                messages.error(
+                    request, "Помилка при введені адреси електронної пошти."
+                )
+            if not "message" in contact_form.cleaned_data.keys():
+                messages.error(request, "Повідомлення не вказане або воно задовге.")
+            if not "user_name" in contact_form.cleaned_data.keys():
+                messages.error(request, "Ім'я не вказане або воно задовге.")
+
+        return http.HttpResponseRedirect("")
+
+
+class FeedbacksView(View):
+    template_name = "feedbacks.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            self.template_name,
+            context={
+                "feedbacks": Feedback.objects.all(),
+                "feedback_form": FeedbackForm(),
             }
         )
 
@@ -44,12 +77,6 @@ class HomeView(View):
                 messages.error(request, "Ім'я не вказане або воно задовге.")
 
         return http.HttpResponseRedirect("")
-
-
-def feedbacks(request):
-    return render(
-        request, "feedbacks.html", context={"feedbacks": Feedback.objects.all()}
-    )
 
 
 def about_page(request):

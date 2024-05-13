@@ -219,72 +219,12 @@
             </div>
         </div>
     </section>
-    <!-- Feedback section-->
-    <section class="bg-light py-5">
-        <div class="container px-5 my-5 px-5">
-            <div class="text-center mb-5">
-                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                <h2 class="fw-bolder">Написати відгук</h2>
-                <p class="lead mb-0">Напишіть, що ви думаєте про нас і нашу роботу</p>
-            </div>
-            <div class="row gx-5 justify-content-center">
-                <div class="col-lg-6">
-                    <form id="contactForm" method="post">
-                    {% csrf_token %}
-
-                        <!-- Name input-->
-                        <div class="form-floating mb-3">
-                            {{ feedback_form.user_name.errors }}
-                            {{ feedback_form.user_name }}
-                            <label for="{{ feedback_form.user_name.id_for_label }}">Ім'я</label>
-                        </div>
-
-                        <!-- Message input-->
-                        <div class="form-floating mb-3">
-                            {{ feedback_form.text.errors }}
-                            {{ feedback_form.text }}
-                            <label for="{{ feedback_form.text.id_for_label }}">Текст</label>
-                        </div>
-                        <!-- Rating input-->
-                        <div class="form-floating mb-3">
-                            {{ feedback_form.rating }}
-                            <label for="{{ feedback_form.rating.id_for_label }}">Оцінка</label>
-                        </div>
-
-                        {% if messages %}
-                            {% for message in messages %}
-                                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                                <!-- Submit success message-->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">{{ message }}</div>
-                                    </div>
-                                </div>
-                                {% endif %}
-                                <!-- Submit error message-->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                <div id="submitErrorMessage"><div class="text-center text-danger mb-3">{{ message }}</div></div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        <!-- Submit Button-->
-                        <div class="d-grid"><input class="btn btn-primary btn-lg" id="submitButton" type="submit" value="Надіслати"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Contact information section-->
     <section class="bg-light py-5">
         <div class="container px-5 my-5 px-5">
             <div class="text-center mb-5">
                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
                 <h2 class="fw-bolder">Зв'яжіться з нами</h2>
-                <!--<p class="lead mb-0">Напишіть, що ви думаєте про нас і нашу роботу</p>-->
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
