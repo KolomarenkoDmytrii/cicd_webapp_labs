@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.views import View
 
 from .models import Feedback
-from .forms import FeedbackForm
+from .forms import FeedbackForm, ContactForm
 
 # Create your views here.
 
@@ -14,13 +14,16 @@ class HomeView(View):
     form_class = FeedbackForm
     template_name = "index.html"
 
-    def context(self, form):
-        """Give context for feedback section and form."""
-        return {"feedbacks": self.model_class.objects.all()[:4], "feedback_form": form}
-
     def get(self, request, *args, **kwargs):
-        feedback_form = FeedbackForm()
-        return render(request, self.template_name, self.context(FeedbackForm()))
+        return render(
+            request,
+            self.template_name,
+            {
+                "feedbacks": self.model_class.objects.all()[:4],
+                "feedback_form": FeedbackForm(),
+                "contact_form": ContactForm(),
+            }
+        )
 
     def post(self, request, *args, **kwargs):
         feedback_form = FeedbackForm(request.POST)
