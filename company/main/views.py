@@ -12,7 +12,7 @@ from .forms import FeedbackForm, ContactForm
 class HomeView(View):
     model_class = Feedback
     form_class = FeedbackForm
-    template_name = "index.html"
+    template_name = "main/index.html"
 
     def get(self, request, *args, **kwargs):
         return render(
@@ -44,7 +44,7 @@ class HomeView(View):
 
 
 class FeedbacksView(View):
-    template_name = "feedbacks.html"
+    template_name = "main/feedbacks.html"
 
     def get(self, request, *args, **kwargs):
         return render(
@@ -78,16 +78,16 @@ class FeedbacksView(View):
 
 
 def about_page(request):
-    return render(request, "about.html")
+    return render(request, "main/about.html")
 
 
 def lawyer_info(request):
-    return render(request, "services_particulars/lawyer.html")
+    return render(request, "main/services_particulars/lawyer.html")
 
 
 def licenses_info(request):
-    return render(request, "services_particulars/licenses.html")
+    return render(request, "main/services_particulars/licenses.html")
 
 
 def registration_info(request):
-    return render(request, "services_particulars/registration.html")
+    return render(request, "main/services_particulars/registration.html")
