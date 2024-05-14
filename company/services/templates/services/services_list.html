@@ -1,0 +1,26 @@
+{% extends "components/base.html" %}
+
+{% block content %}
+    <section class="py-5 border-bottom" id="features">
+        <div class="container px-5 my-5">
+            {% for category, services_items in services.items %}
+                <h2>{{ category }}</h2>
+
+                <table class="table">
+                    <tr>
+                        <th>Назва</th>
+                        <th>Мінімальна кількість днів</th>
+                        <th>Ціна</th>
+                    </tr>
+                    {% for service in services_items %}
+                        <tr>
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.min_terms }}</td>
+                            <td>{{ service.price }}₴</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

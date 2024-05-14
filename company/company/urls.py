@@ -18,17 +18,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from main import views
+import main.views
+import services.views
 
 urlpatterns = [
     # Admin site path
     path("admin/", admin.site.urls),
 
-    # Website paths
-    path("", views.HomeView.as_view(), name="home"),
-    path("feedbacks", views.FeedbacksView.as_view(), name="feedbacks"),
-    path("services_particulars/lawyer", views.lawyer_info, name="services-lawyer-info"),
-    path("services_particulars/licenses", views.licenses_info, name="services-licenses-info"),
-    path("services_particulars/registration", views.registration_info, name="services-registration-info"),
-    path("about", views.about_page, name="about-page"),
+    # Website paths: main app
+    path("", main.views.HomeView.as_view(), name="home"),
+    path("feedbacks", main.views.FeedbacksView.as_view(), name="feedbacks"),
+    path("services_particulars/lawyer", main.views.lawyer_info, name="services-lawyer-info"),
+    path("services_particulars/licenses", main.views.licenses_info, name="services-licenses-info"),
+    path("services_particulars/registration", main.views.registration_info, name="services-registration-info"),
+    path("about", main.views.about_page, name="about-page"),
+
+    # Website paths: services app
+    path("services", services.views.services_list, name="services"),
 ]
