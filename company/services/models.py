@@ -32,6 +32,6 @@ class Service(models.Model):
         ordering = ["category__name", "name"]
 
     def __str__(self):
-        return f"{self.category} | {self.name}: min {self.min_terms} днів, {self.price}₴"
-
-
+        return (
+            f"{self.category} | {self.name}: min {self.min_terms} днів, {self.price}₴"
+        )

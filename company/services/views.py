@@ -14,9 +14,5 @@ def services_list(request):
         services[category.name] = services_items
 
     return render(
-        request,
-        "services/services_list.html",
-        context={
-            "services": services
-        }
+        request, "services/services_list.html", context={"services": services}
     )
