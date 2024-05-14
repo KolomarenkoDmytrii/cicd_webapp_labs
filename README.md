@@ -16,3 +16,7 @@ To run migrations:
 
 To create admin account (superuser):
 `docker-compose -f docker-compose.yml run web python company/manage.py createsuperuser`
+
+To create (load) "Editors" user group run:
+- To dump: `docker-compose -f docker-compose.yml run web python company/manage.py dumpdata auth.group --indent 4 --output datadumps/dumpdata_name.json`
+- To load: `docker-compose -f docker-compose.yml run web python company/manage.py loaddata datadumps/dumpdata_name.json`
