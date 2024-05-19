@@ -1,0 +1,58 @@
+{% extends "components/base_with_form.html" %}
+
+
+{% block form_header %}
+    <h2 class="fw-bolder">Написати відгук</h2>
+    <p class="lead mb-0">Напишіть, що ви думаєте про нас і нашу роботу</p>
+{% endblock form_header %}
+
+{% block input_fields %}
+    <!-- Name input-->
+    <div class="form-floating mb-3">
+        {{ feedback_form.user_name.errors }}
+        {{ feedback_form.user_name }}
+        <label for="{{ feedback_form.user_name.id_for_label }}">Ім'я</label>
+    </div>
+
+    <!-- Message input-->
+    <div class="form-floating mb-3">
+        {{ feedback_form.text.errors }}
+        {{ feedback_form.text }}
+        <label for="{{ feedback_form.text.id_for_label }}">Текст</label>
+    </div>
+    <!-- Rating input-->
+    <div class="form-floating mb-3">
+        {{ feedback_form.rating }}
+        <label for="{{ feedback_form.rating.id_for_label }}">Оцінка</label>
+    </div>
+{% endblock input_fields %}
+
+
+{% block content_after_form %}
+    <!-- Testimonials section-->
+    <section class="py-5 border-bottom">
+        <div class="container px-5 my-5 px-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Відгуки про нас</h2>
+                <p class="lead mb-0">Дізнайтеся, що про нас думають</p>
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    {% for feedback in feedbacks %}
+                        <div class="card mb-4">
+                            <div class="card-body p-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
+                                    <div class="ms-4">
+                                        <p class="mb-1" style="display:inline-block; word-break:break-word;">{{ feedback.text }}</p>
+                                        <div class="small text-muted">- {{ feedback.user_name }}, {{ feedback.rating }}, ({{ feedback.published_at }})</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content_after_form %}

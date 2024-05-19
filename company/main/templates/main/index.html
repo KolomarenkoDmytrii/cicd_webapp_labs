@@ -1,0 +1,114 @@
+{% extends "components/base_with_form.html" %}
+
+
+{% block content %}
+    <!-- Features section-->
+    <section class="py-5 border-bottom" id="services">
+        <div class="container px-5 my-5">
+            <div class="row gx-5">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                    <h2 class="h4 fw-bolder">Послуги адвоката</h2>
+                    <p>Найняти кращого адвоката/отримати адвокатські послуги за найвигіднішою ціною Ви можете тільки тут ✔Швидке оформлення ✔Досвідчені юристи. Тисніть прямо зараз!</p>
+                    <a class="text-decoration-none" href="{% url 'services-lawyer-info' %}">
+                        Детальніше
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
+                    <h2 class="h4 fw-bolder">Ліцензії/дозволи</h2>
+                    <p>Замовити ліцензію на будівельну діяльність/охорону власності і майна/продаж алкоголю та тютюнових виробів Ви можете тільки тут</p>
+                    <a class="text-decoration-none" href="{% url 'services-licenses-info' %}">
+                        Детальніше
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                    <h2 class="h4 fw-bolder">Реєстраційні послуги</h2>
+                    <p>Реєстраційні послуги для юридичних осіб та ФОП Замовити реєстраційні послуги «під ключ»: реєстрація/зміни фізичної особи-підприємця/ТОВ/громадських та благодійних організацій</p>
+                    <a class="text-decoration-none" href="{% url 'services-registration-info' %}">
+                        Детальніше
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials section-->
+    <section class="py-5 border-bottom">
+        <div class="container px-5 my-5 px-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Відгуки про нас</h2>
+                <p class="lead mb-0">Дізнайтеся, що про нас думають</p>
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    {% for feedback in feedbacks %}
+
+                        <div class="card mb-4">
+                            <div class="card-body p-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
+                                    <div class="ms-4">
+                                        <p class="mb-1" style="display:inline-block; word-break:break-word;">{{ feedback.text }}</p>
+                                        <div class="small text-muted">- {{ feedback.user_name }}, {{ feedback.rating }}, ({{ feedback.published_at }})</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+
+{% block form_header %}
+    <h2 class="fw-bolder">Зв'яжіться з нами</h2>
+{% endblock form_header %}
+
+{% block input_fields %}
+    <!-- Name input-->
+    <div class="form-floating mb-3">
+        {{ contact_form.user_name }}
+        <label for="{{ feedback_form.user_name.id_for_label }}">Ім'я</label>
+    </div>
+
+    <!-- Email input-->
+    <div class="form-floating mb-3">
+        {{ contact_form.email }}
+        <label for="{{ feedback_form.text.id_for_label }}">Електронна пошта</label>
+    </div>
+    <!-- Message input-->
+    <div class="form-floating mb-3">
+        {{ contact_form.message }}
+        <label for="{{ feedback_form.rating.id_for_label }}">Повідомлення</label>
+    </div>
+{% endblock input_fields %}
+
+{% block content_after_form %}
+    <section class="py-5 border-top" id="contacts">
+        <div class="text-center mb-5">
+            <p>Адреса:<br />
+            м. Київ<br />
+            вул. Оболонська, 13/15 оф. 57
+            </p>
+
+            <p>
+            Email:<br />
+            lawflagman@gmail.com
+            </p>
+
+            <p>
+            Телефони:<br />
+            (044) 221-44-54<br />
+            (068) 629-12-12<br />
+            (093) 629-12-12
+            </p>
+        </div>
+    </section>
+{% endblock content_after_form %}
