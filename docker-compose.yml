@@ -12,6 +12,7 @@ services:
             - "5432:5432"
     web:
         build: .
+        command: python company/manage.py test company
         command: python company/manage.py runserver 0.0.0.0:8000
         volumes:
             - .:/app
