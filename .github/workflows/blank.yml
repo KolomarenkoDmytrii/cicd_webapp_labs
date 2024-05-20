@@ -35,4 +35,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a test script
-        run: docker-compose -f docker-compose.yml up
+        run: docker-compose -f docker-compose.yml run web python company/manage.py test
