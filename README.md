@@ -8,7 +8,7 @@ The text content is taken from https://lawflagman.com.ua/
 
 ## How to run the project
 To run the project execute this command:
-`docker-compose -f docker-compose.yml up`
+`docker-compose -f run-webapp-docker-compose.yml up`
 
 To run migrations:
 1. `docker-compose -f docker-compose.yml run web python company/manage.py makemigrations` (сreate new migrations)
