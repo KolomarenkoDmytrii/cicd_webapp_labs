@@ -34,5 +34,9 @@ jobs:
         run: docker-compose -f docker-compose.yml run web python company/manage.py migrate
 
       # Runs a single command using the runners shell
-      - name: Run a test script
-        run: docker-compose -f docker-compose.yml run web python company/manage.py test
+      - name: Run a test script for main app
+        run: docker-compose -f docker-compose.yml run web python company/manage.py test main.tests
+
+      # Runs a single command using the runners shell
+      - name: Run a test script for services app
+        run: docker-compose -f docker-compose.yml run web python company/manage.py test services.tests
