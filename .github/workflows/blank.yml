@@ -57,12 +57,18 @@ jobs:
 
       - name: Set Git config
         run: |
-            git config --local user.email "actions@github.com"
-            git config --local user.name "Github Actions"
+          git config --local user.email "<>"
+          git config --local user.name "Github Actions"
+
+      - name: Clone the repository
+        run: |
+          git clone "https://$GITHUB_ACTOR:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/KolomarenkoDmytrii/cicd_webapp_labs.git
 
       - name: Merge develop branch with main branch
         run: |
+          cd cicd_webapp_labs
           git checkout main
-          get merge develop -m "Auto-merge develop to main"
+          git merge develop -m "Auto-merge develop to main"
+          git push origin main
         #gh pr checkout main
         #gh pr merge develop
