@@ -2,6 +2,9 @@
 
 name: CI
 
+env:
+  GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -44,6 +47,8 @@ jobs:
         run: docker-compose -f docker-compose.yml run web python company/manage.py test services.tests
 
   automerge:
+    needs: build
+    if: ${{ success() }}
     runs-on: ubuntu-latest
 
     steps:
@@ -54,4 +59,3 @@ jobs:
         run: |
           gh pr checkout main
           gh pr merge develop
-
