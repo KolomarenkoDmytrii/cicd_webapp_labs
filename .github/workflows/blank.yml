@@ -51,7 +51,7 @@ jobs:
         - uses: actions/checkout@v4
 
         - name: Merge develop branch with main branch
-        run: |
-          gh pr checkout main
-          gh pr merge develop
+          run: |
+            gh pr checkout main
+            gh pr merge develop
 
