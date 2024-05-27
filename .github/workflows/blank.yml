@@ -62,7 +62,7 @@ jobs:
 
       - name: Clone the repository
         run: |
-          git clone "https://$GITHUB_ACTOR:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/KolomarenkoDmytrii/cicd_webapp_labs.git
+          git clone "https://$GITHUB_ACTOR:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/KolomarenkoDmytrii/cicd_webapp_labs.git"
 
       - name: Merge develop branch with main branch
         run: |
