@@ -55,5 +55,5 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        heroku git:remote -a knu-cicd-web-app-lab
+        heroku git:remote -a cicd_webapp_labs
         git push heroku main
