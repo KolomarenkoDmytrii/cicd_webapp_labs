@@ -55,7 +55,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Set Git config
+        run: |
+            git config --local user.email "actions@github.com"
+            git config --local user.name "Github Actions"
+
       - name: Merge develop branch with main branch
         run: |
-          gh pr checkout main
-          gh pr merge develop
+          git checkout main
+          get merge develop -m "Auto-merge develop to main"
+        #gh pr checkout main
+        #gh pr merge develop
