@@ -6,9 +6,11 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main", "develop" ]
+    #branches: [ "main", "develop" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    #branches: [ "main", "develop" ]
+    branches: [ "develop" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -40,3 +42,16 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a test script for services app
         run: docker-compose -f docker-compose.yml run web python company/manage.py test services.tests
+
+    auto-merge:
+      runs-on: ubuntu-latest
+
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v4
+
+        - name: Merge develop branch with main branch
+        run: |
+          gh pr checkout main
+          gh pr merge develop
+
