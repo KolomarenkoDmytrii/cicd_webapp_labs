@@ -53,6 +53,10 @@ jobs:
       - name: Run a test script for services app
         run: docker-compose -f docker-compose.yml run web python company/manage.py test services.tests
 
+      - name: Dump docker logs on failure
+        if: failure()
+        uses: jwalton/gh-docker-logs@v2
+
   automerge:
     needs: build
     if: ${{ success() }}
