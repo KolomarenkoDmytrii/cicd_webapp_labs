@@ -2,6 +2,7 @@
 services:
     db:
         image: postgres
+        restart: always
         volumes:
             - ./data/db:/var/lib/postgresql/data
         #environment:
@@ -11,6 +12,7 @@ services:
         ports:
             - "5432:5432"
     web:
+        restart: always
         build: .
         command: bash -c "cd company && python manage.py test && gunicorn company.wsgi:application --bind 0.0.0.0:8000"
         volumes:
