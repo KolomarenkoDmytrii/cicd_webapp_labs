@@ -33,6 +33,7 @@ jobs:
           ls -A
           echo POSTGRES_DB="${{ vars.POSTGRES_DB }}" >> .env
           echo POSTGRES_USER="${{ vars.POSTGRES_USER }}" >> .env
+          echo POSTGRES_HOST="${{ vars.POSTGRES_HOST }}" >> .env
           echo DJANGO_DEBUG="${{ vars.DJANGO_DEBUG }}" >> .env
           echo DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
           echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
@@ -43,10 +44,10 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a migrate script
-        env:
+        #env:
           # use localhost for the host here because we are running the job on the VM.
           # If we were running the job on in a container this would be postgres
-          POSTGRES_HOST: postgres
+          #POSTGRES_HOST: postgres
           # POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
         run: docker-compose -f docker-compose.yml run web python company/manage.py migrate
 
