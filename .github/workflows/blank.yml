@@ -27,6 +27,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Run a makemigrations script
+        run: docker-compose -f docker-compose.yml run web python company/manage.py collectstatic --noinput
+
       - name: Generate Django secret key
         run: DJANGO_SECRET_KEY=`docker-compose -f docker-compose.yml run web python company/manage.py shell -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"`
 
