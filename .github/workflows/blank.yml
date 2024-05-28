@@ -29,6 +29,7 @@ jobs:
 
       - name: Setting up secrets
         run: |
+          env
           DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
           POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
