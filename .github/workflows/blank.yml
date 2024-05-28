@@ -34,6 +34,7 @@ jobs:
           DJANGO_DEBUG: "${{ vars.DJANGO_DEBUG }}"
           DJANGO_SECRET_KEY: "${{ secrets.DJANGO_SECRET_KEY }}"
           POSTGRES_PASSWORD: "${{ secrets.POSTGRES_PASSWORD }}"
+        run: echo "${{ vars.POSTGRES_DB }}"
 
       # Runs a single command using the runners shell
       - name: Run a makemigrations script
