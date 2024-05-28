@@ -27,14 +27,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Setting up secrets
-        env:
-          POSTGRES_DB: "${{ vars.POSTGRES_DB }}"
-          POSTGRES_USER: "${{ vars.POSTGRES_USER }}"
-          DJANGO_DEBUG: "${{ vars.DJANGO_DEBUG }}"
-          DJANGO_SECRET_KEY: "${{ secrets.DJANGO_SECRET_KEY }}"
-          POSTGRES_PASSWORD: "${{ secrets.POSTGRES_PASSWORD }}"
-        run: echo "${{ vars.POSTGRES_DB }}"
+      - name: 'Create env file'
+        run: |
+          touch .env
+          ls -A
+          echo POSTGRES_DB="${{ vars.POSTGRES_DB }}" >> .env
+          echo POSTGRES_USER="${{ vars.POSTGRES_USER }}" >> .env
+          echo DJANGO_DEBUG="${{ vars.DJANGO_DEBUG }}" >> .env
+          echo DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} >> .env
+          echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
 
       # Runs a single command using the runners shell
       - name: Run a makemigrations script
