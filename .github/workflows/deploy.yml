@@ -78,12 +78,12 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 
-      - name: Add Heroku remote
-        run: heroku git:remote --app knu-cicd-web-app-lab
+    - name: Add Heroku remote
+      run: heroku git:remote --app knu-cicd-web-app-lab
 
-      - name: Build and deploy
-        run: |
-          heroku container:login
-          docker-compose -f docker-compose-deploy.yml build
-          docker-compose -f docker-compose-deploy.yml push
-          heroku container:release web
+    - name: Build and deploy
+      run: |
+        heroku container:login
+        docker-compose -f docker-compose-deploy.yml build
+        docker-compose -f docker-compose-deploy.yml push
+        heroku container:release web
