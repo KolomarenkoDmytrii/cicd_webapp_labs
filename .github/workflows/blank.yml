@@ -27,6 +27,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: 'Create env file'
+        run: |
+          touch .env
+          ls -A
+          echo POSTGRES_DB="${{ vars.POSTGRES_DB }}" >> .env
+          echo POSTGRES_USER="${{ vars.POSTGRES_USER }}" >> .env
+          echo POSTGRES_HOST="${{ vars.POSTGRES_HOST }}" >> .env
+          echo DJANGO_DEBUG="${{ vars.DJANGO_DEBUG }}" >> .env
+          echo DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+          echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
+
       # Runs a single command using the runners shell
       - name: Run a makemigrations script
         run: docker-compose -f docker-compose.yml run web python company/manage.py makemigrations
@@ -43,6 +54,10 @@ jobs:
       - name: Run a test script for services app
         run: docker-compose -f docker-compose.yml run web python company/manage.py test services.tests
 
+      - name: Dump docker logs on failure
+        if: failure()
+        uses: jwalton/gh-docker-logs@v2
+
   automerge:
     needs: build
     if: ${{ success() }}
@@ -54,8 +69,8 @@ jobs:
 
       - name: Set Git config
         run: |
-          git config --local user.email "<>"
-          git config --local user.name "Github Actions"
+          git config --global user.email "<>"
+          git config --global user.name "Github Actions"
 
       - name: Clone the repository
         run: |

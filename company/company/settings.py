@@ -12,21 +12,29 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv()  # take environment variables from .env
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-2sijt%zdfo8v4=%7f#81q#umz8-1d=w^s2e)=1)j*9e84x1o@z"
+# SECRET_KEY = "django-insecure-2sijt%zdfo8v4=%7f#81q#umz8-1d=w^s2e)=1)j*9e84x1o@z"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get("DJANGO_DEBUG")))
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "knu-cicd-web-app-lab.herokuapp.com"]
+
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -52,6 +60,32 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+if not DEBUG:
+    MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")
+
+# STORAGES = {}
+# if not DEBUG:
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}
+
 
 ROOT_URLCONF = "company.urls"
 
@@ -84,14 +118,13 @@ WSGI_APPLICATION = "company.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
+        'NAME': os.environ.get('POSTGRES_DB'),
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'db',
+        'HOST': os.environ.get('POSTGRES_HOST'),
         'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -129,11 +162,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_DIRS = []
+# if DEBUG:
+    # STATICFILES_DIRS.append(STATIC_ROOT)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

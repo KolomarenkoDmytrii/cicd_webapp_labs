@@ -2,24 +2,26 @@
 services:
     db:
         image: postgres
+        # restart: always
         volumes:
             - ./data/db:/var/lib/postgresql/data
         environment:
-            - POSTGRES_DB=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
         ports:
             - "5432:5432"
     web:
+        # restart: always
         build: .
-        command: python company/manage.py test company
+        command: bash -c "cd company && python manage.py test && gunicorn company.wsgi:application --bind 0.0.0.0:8000"
         volumes:
             - .:/app
         ports:
             - "8000:8000"
-        environment:
-            - POSTGRES_NAME=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
+        #environment:
+            #- POSTGRES_NAME=postgres
+            #- POSTGRES_USER=postgres
+            #- POSTGRES_PASSWORD=postgres
         depends_on:
             - db
