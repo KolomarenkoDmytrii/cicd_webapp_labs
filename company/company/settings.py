@@ -24,7 +24,6 @@ load_dotenv()  # take environment variables from .env
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "django-insecure-2sijt%zdfo8v4=%7f#81q#umz8-1d=w^s2e)=1)j*9e84x1o@z"
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -63,8 +62,6 @@ MIDDLEWARE = [
 if not DEBUG:
     MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")
 
-# STORAGES = {}
-# if not DEBUG:
 STORAGES = {
     # ...
     "staticfiles": {
@@ -166,8 +163,6 @@ STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = []
-# if DEBUG:
-    # STATICFILES_DIRS.append(STATIC_ROOT)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
