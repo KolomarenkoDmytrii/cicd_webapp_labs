@@ -5,5 +5,5 @@ WORKDIR /app
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python company/manage.py collectstatic --noinput
-CMD tail -f /dev/null
+CMD cd company && gunicorn company.wsgi:application --bind 0.0.0.0:${PORT}
 EXPOSE 8000
