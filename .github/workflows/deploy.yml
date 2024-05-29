@@ -83,6 +83,7 @@ jobs:
               #login ${{ secrets.HEROKU_EMAIL }}
               #password ${{ secrets.HEROKU_API_KEY }}
             #EOF
+          echo flfl ${{ secrets.HEROKU_EMAIL }}
           touch ~/.netrc
           echo "machine api.heroku.com" >> ~/.netrc
           echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
@@ -91,9 +92,9 @@ jobs:
           echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
           echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
             
-      #env:
-        #HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        #HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 
     #- name: Add Heroku remote
       #run: heroku git:remote --app knu-cicd-web-app-lab
