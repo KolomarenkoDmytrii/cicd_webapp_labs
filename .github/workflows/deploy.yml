@@ -75,14 +75,22 @@ jobs:
          #heroku_email: "${{secrets.HEROKU_EMAIL}}"
          #usedocker: true
       run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login ${{ secrets.HEROKU_EMAIL }}
-              password ${{ secrets.HEROKU_API_KEY }}
-            machine git.heroku.com
-              login ${{ secrets.HEROKU_EMAIL }}
-              password ${{ secrets.HEROKU_API_KEY }}
-            EOF
+          #cat > ~/.netrc <<EOF
+            #machine api.heroku.com
+              #login ${{ secrets.HEROKU_EMAIL }}
+              #password ${{ secrets.HEROKU_API_KEY }}
+            #machine git.heroku.com
+              #login ${{ secrets.HEROKU_EMAIL }}
+              #password ${{ secrets.HEROKU_API_KEY }}
+            #EOF
+          touch ~/.netrc
+          echo "machine api.heroku.com" >> ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          echo "machine git.heroku.com" >> ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+            
       #env:
         #HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         #HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
