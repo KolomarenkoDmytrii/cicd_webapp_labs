@@ -82,7 +82,8 @@ jobs:
 
     - name: Build and deploy
       run: |
-        heroku container:login
-        docker-compose -f docker-compose-deploy.yml build
-        docker-compose -f docker-compose-deploy.yml push
+        #heroku container:login
+        docker-compose -f docker-compose.yml build
+        #docker-compose -f docker-compose.yml push
+        heroku container:push web
         heroku container:release web
