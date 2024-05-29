@@ -56,10 +56,34 @@ jobs:
         echo DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
         echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
     
-    - uses: akhileshns/heroku-deploy@v3.12.12
-      with: 
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}} 
-        heroku_app_name: "knu-cicd-web-app-lab"
-        heroku_email: "dmytrii_kolomarenko@knu.ua"
-        env_file: ".env"
-        #usedocker: true
+    # - uses: akhileshns/heroku-deploy@v3.12.12
+    #   with:
+    #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+    #     heroku_app_name: "knu-cicd-web-app-lab"
+    #     heroku_email: "dmytrii_kolomarenko@knu.ua"
+    #     env_file: ".env"
+    #     #usedocker: true
+
+    - name: Heroku login credentials
+      run: |
+        cat > ~/.netrc <<EOF
+          machine api.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          machine git.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          EOF
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+
+      - name: Add Heroku remote
+        run: heroku git:remote --app knu-cicd-web-app-lab
+
+      - name: Build and deploy
+        run: |
+          heroku container:login
+          docker-compose -f docker-compose.yml build
+          docker-compose -f docker-compose.yml push
+          heroku container:release web db

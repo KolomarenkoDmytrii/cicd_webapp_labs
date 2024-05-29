@@ -11,6 +11,9 @@ services:
         ports:
             - "5432:5432"
     web:
+        image: "registry.heroku.com/knu-cicd-web-app-lab/web"
+        tags:
+            - "registry.heroku.com/knu-cicd-web-app-lab/web"
         build: .
         command: bash -c "cd company && python manage.py test && gunicorn company.wsgi:application --bind 0.0.0.0:8000"
         volumes:
