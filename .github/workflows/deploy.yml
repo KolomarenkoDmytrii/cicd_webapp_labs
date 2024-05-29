@@ -65,24 +65,24 @@ jobs:
         echo DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
         echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
 
-    #- name: Heroku login credentials
-    - run: echo "${{secrets.HEROKU_EMAIL}}"
+    - name: Heroku login credentials
+    #- run: echo "${{secrets.HEROKU_EMAIL}}"
     
-    - uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-         heroku_app_name: "knu-cicd-web-app-lab"
-         heroku_email: "${{secrets.HEROKU_EMAIL}}"
+    #- uses: akhileshns/heroku-deploy@v3.12.12
+      #with:
+         #heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+         #heroku_app_name: "knu-cicd-web-app-lab"
+         #heroku_email: "${{secrets.HEROKU_EMAIL}}"
          #usedocker: true
-    #run: |
-        #cat > ~/.netrc <<EOF
-          #machine api.heroku.com
-            #login ${{ secrets.HEROKU_EMAIL }}
-            #password ${{ secrets.HEROKU_API_KEY }}
-          #machine git.heroku.com
-            #login ${{ secrets.HEROKU_EMAIL }}
-            #password ${{ secrets.HEROKU_API_KEY }}
-          #EOF
+      run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login ${{ secrets.HEROKU_EMAIL }}
+              password ${{ secrets.HEROKU_API_KEY }}
+            machine git.heroku.com
+              login ${{ secrets.HEROKU_EMAIL }}
+              password ${{ secrets.HEROKU_API_KEY }}
+            EOF
       #env:
         #HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         #HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
@@ -90,8 +90,8 @@ jobs:
     #- name: Add Heroku remote
       #run: heroku git:remote --app knu-cicd-web-app-lab
 
-    #- name: Build and deploy
-      #run: |
-        #heroku container:login
-        #heroku container:push web --app knu-cicd-web-app-lab
-        #heroku container:release web --app knu-cicd-web-app-lab
+    - name: Build and deploy
+      run: |
+        heroku container:login
+        heroku container:push web --app knu-cicd-web-app-lab
+        heroku container:release web --app knu-cicd-web-app-lab
