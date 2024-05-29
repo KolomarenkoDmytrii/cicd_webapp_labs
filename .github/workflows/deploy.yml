@@ -73,7 +73,7 @@ jobs:
          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
          heroku_app_name: "knu-cicd-web-app-lab"
          heroku_email: "${{secrets.HEROKU_EMAIL}}"
-         #usedocker: true
+         usedocker: true
     #run: |
         #cat > ~/.netrc <<EOF
           #machine api.heroku.com
@@ -90,8 +90,8 @@ jobs:
     #- name: Add Heroku remote
       #run: heroku git:remote --app knu-cicd-web-app-lab
 
-    - name: Build and deploy
-      run: |
-        heroku container:login
-        heroku container:push web --app knu-cicd-web-app-lab
-        heroku container:release web --app knu-cicd-web-app-lab
+    #- name: Build and deploy
+      #run: |
+        #heroku container:login
+        #heroku container:push web --app knu-cicd-web-app-lab
+        #heroku container:release web --app knu-cicd-web-app-lab
