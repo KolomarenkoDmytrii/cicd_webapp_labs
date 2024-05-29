@@ -67,17 +67,17 @@ jobs:
 
     
     
-    #- uses: akhileshns/heroku-deploy@v3.12.12
-      #with:
-        #heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        #heroku_app_name: "knu-cicd-web-app-lab"
-        #heroku_email: "${{secrets.HEROKU_EMAIL}}"
-        #usedocker: true 
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "knu-cicd-web-app-lab"
+        heroku_email: "${{secrets.HEROKU_EMAIL}}"
+        usedocker: true 
 
     - run: echo "${{secrets.HEROKU_EMAIL}}"
       
-    - name: Heroku login credentials
-      run: |
+    #- name: Heroku login credentials
+      #run: |
           #cat > ~/.netrc <<EOF
             #machine api.heroku.com
               #login ${{ secrets.HEROKU_EMAIL }}
@@ -87,26 +87,26 @@ jobs:
               #password ${{ secrets.HEROKU_API_KEY }}
             #EOF
           #echo flfl ${{ secrets.HEROKU_EMAIL }}
-          touch ~/.netrc
-          echo "machine api.heroku.com" >> ~/.netrc
-          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
-          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
-          echo "machine git.heroku.com" >> ~/.netrc
-          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
-          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          #touch ~/.netrc
+          #echo "machine api.heroku.com" >> ~/.netrc
+          #echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          #echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          #echo "machine git.heroku.com" >> ~/.netrc
+          #echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          #echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
 
     - run: head -n 2 ~/.netrc
             
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      #env:
+        #HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        #HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 
     #- name: Add Heroku remote
       #run: heroku git:remote --app knu-cicd-web-app-lab
 
-    - name: Build and deploy
-      run: |
-        docker login --username=${{ secrets.HEROKU_EMAIL }} --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
+    #- name: Build and deploy
+      #run: |
+        #docker login --username=${{ secrets.HEROKU_EMAIL }} --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
         #heroku container:login
-        heroku container:push web --app knu-cicd-web-app-lab
-        heroku container:release web --app knu-cicd-web-app-lab
+        #heroku container:push web --app knu-cicd-web-app-lab
+        #heroku container:release web --app knu-cicd-web-app-lab
