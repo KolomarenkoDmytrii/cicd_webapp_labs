@@ -65,16 +65,16 @@ jobs:
         echo DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
         echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
 
-    - name: Heroku login credentials
+    #- name: Heroku login credentials
     #- run: echo "${{secrets.HEROKU_EMAIL}}"
     
-    #- uses: akhileshns/heroku-deploy@v3.12.12
-      #with:
-         #heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-         #heroku_app_name: "knu-cicd-web-app-lab"
-         #heroku_email: "${{secrets.HEROKU_EMAIL}}"
-         #usedocker: true
-      run: |
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "knu-cicd-web-app-lab"
+        heroku_email: "${{secrets.HEROKU_EMAIL}}"
+        usedocker: true
+      #run: |
           #cat > ~/.netrc <<EOF
             #machine api.heroku.com
               #login ${{ secrets.HEROKU_EMAIL }}
@@ -83,14 +83,14 @@ jobs:
               #login ${{ secrets.HEROKU_EMAIL }}
               #password ${{ secrets.HEROKU_API_KEY }}
             #EOF
-          echo flfl ${{ secrets.HEROKU_EMAIL }}
-          touch ~/.netrc
-          echo "machine api.heroku.com" >> ~/.netrc
-          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
-          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
-          echo "machine git.heroku.com" >> ~/.netrc
-          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
-          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          #echo flfl ${{ secrets.HEROKU_EMAIL }}
+          #touch ~/.netrc
+          #echo "machine api.heroku.com" >> ~/.netrc
+          #echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          #echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          #echo "machine git.heroku.com" >> ~/.netrc
+          #echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          #echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
             
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
