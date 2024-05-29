@@ -31,6 +31,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = bool(int(os.environ.get("DJANGO_DEBUG")))
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "knu-cicd-web-app-lab-46b9fd37f71a.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = ["knu-cicd-web-app-lab-46b9fd37f71a.herokuapp.com"]
 
 
 CSRF_COOKIE_SECURE = True
