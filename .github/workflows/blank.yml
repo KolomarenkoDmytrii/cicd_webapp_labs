@@ -69,8 +69,8 @@ jobs:
 
       - name: Set Git config
         run: |
-          git config --local user.email "<>"
-          git config --local user.name "Github Actions"
+          git config --global user.email "<>"
+          git config --global user.name "Github Actions"
 
       - name: Clone the repository
         run: |
