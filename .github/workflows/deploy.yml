@@ -64,8 +64,7 @@ jobs:
       with:
          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
          heroku_app_name: "knu-cicd-web-app-lab"
-         heroku_email: ${{secrets.HEROKU_EMAIL}}
-         #env_file: ".env"
+         heroku_email: ${{secrets.HEROKU_EMAIL}}"
          usedocker: true
     #run: |
         #cat > ~/.netrc <<EOF
@@ -85,8 +84,6 @@ jobs:
 
     - name: Build and deploy
       run: |
-        #heroku container:login
-        docker-compose -f docker-compose.yml build
-        #docker-compose -f docker-compose.yml push
-        heroku container:push web
-        heroku container:release web
+        heroku container:login
+        heroku container:push web --app knu-cicd-web-app-lab
+        heroku container:release web --app knu-cicd-web-app-lab
