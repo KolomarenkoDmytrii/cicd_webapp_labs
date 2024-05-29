@@ -62,3 +62,4 @@ jobs:
         heroku_app_name: "knu-cicd-web-app-lab"
         heroku_email: "dmytrii_kolomarenko@knu.ua"
         env_file: ".env"
+        usedocker: true
