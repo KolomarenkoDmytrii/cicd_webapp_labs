@@ -12,7 +12,7 @@ services:
             - "5432:5432"
     web:
         build: .
-        command: bash -c "cd company && python manage.py test && gunicorn company.wsgi:application --bind 0.0.0.0:8000"
+        command: bash -c "cd company && python manage.py test && gunicorn company.wsgi:application --bind 0.0.0.0:${PORT}"
         volumes:
             - .:/app
         ports:

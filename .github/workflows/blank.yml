@@ -34,6 +34,7 @@ jobs:
           echo POSTGRES_USER="${{ vars.POSTGRES_USER }}" >> .env
           echo POSTGRES_HOST="${{ vars.POSTGRES_HOST }}" >> .env
           echo DJANGO_DEBUG="${{ vars.DJANGO_DEBUG }}" >> .env
+          echo PORT="${{ vars.GUNICORN_PORT }}" >> .env
           echo DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
           echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
 
