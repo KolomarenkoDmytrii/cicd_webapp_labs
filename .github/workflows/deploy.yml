@@ -60,6 +60,7 @@ jobs:
         echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
 
     #- name: Heroku login credentials
+    - run: echo "${{secrets.HEROKU_EMAIL}}"
     - uses: akhileshns/heroku-deploy@v3.12.12
       with:
          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
