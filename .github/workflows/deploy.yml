@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_call:
+    secrets:
+      HEROKU_API_KEY:
+        required: true
+      HEROKU_EMAIL:
+        required: true
 
 jobs:     
   build:
@@ -61,6 +67,7 @@ jobs:
 
     #- name: Heroku login credentials
     - run: echo "${{secrets.HEROKU_EMAIL}}"
+    
     - uses: akhileshns/heroku-deploy@v3.12.12
       with:
          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
