@@ -23,6 +23,7 @@ jobs:
           echo PORT="${{ vars.GUNICORN_PORT }}" >> .env
           echo DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
           echo POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> .env
 
       # Runs a single command using the runners shell
       - name: Run a makemigrations script
