@@ -1,4 +1,4 @@
-name: Django CI/CD: Build, test and deploy
+name: "Django CI/CD: Build, test and deploy"
 
 on:
   push:
